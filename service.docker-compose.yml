@@ -1,0 +1,41 @@
+version: '3.5'
+services:
+  hello:
+    image: localhost:5001/hello
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    build:
+      context: ./hello
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./hello/.env
+    ports:
+      - "8002:8002"
+  happy:
+    image: localhost:5001/happy
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    build:
+      context: ./happy
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./happy/.env
+    ports:
+      - "8003:8003"
+  you:
+    image: localhost:5001/you
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    build:
+      context: ./you
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./you/.env
+    ports:
+      - "8001:8001"
