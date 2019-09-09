@@ -1,17 +1,21 @@
 version: '3.5'
 services:
-  postgres:
-    image: postgres
+  postgres_demo:
+    image: postgres_demo
+    container_name: postgres_demo
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure
+    build:
+      context: ./postgres
+      dockerfile: ./Dockerfile
     env_file:
     - ./postgres/.env
     volumes:
-    - postgres:/data/db
+    - postgres_data:/data/db
     ports:
     - "5433:5432"
 
 volumes:
-  postgres:
+  postgres_data:
